@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    /* ------------------------------------------------------------------
+       Core compiler options
+       ------------------------------------------------------------------ */
+    "target": "esnext",               // Keep up‑to‑date with your runtime
+    "module": "esnext",               // ESM output – works with Vite, CRA, etc.
+    "moduleResolution": "node",       // Standard Node resolution
+    "jsx": "react-jsx",               // React 17+ automatic JSX transform
+    "strict": true,                   // Turn on all strict checks
+    "skipLibCheck": false,            // Let us catch lib errors while debugging
+    "noImplicitAny": true,            // Good sanity checks
+    "esModuleInterop": true,          // Default imports from CommonJS
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* ------------------------------------------------------------------
+       Helpful flags for a React project
+       ------------------------------------------------------------------ */
+    "isolatedModules": true,          // Required for Babel/ESBuild
+    "noEmit": true,                   // Don’t emit JS (use tsc --noEmit for type‑check only)
+
+    /* ------------------------------------------------------------------
+       Type‑declaration resolution
+       ------------------------------------------------------------------ */
+    "types": ["node", "react", "react-dom"],
+
+    /* ------------------------------------------------------------------
+       Miscellaneous
+       ------------------------------------------------------------------ */
+    "declaration": true,              // If you’re building a library
+    "declarationMap": true,
+    "sourceMap": true
+  },
+
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
