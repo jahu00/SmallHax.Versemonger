@@ -32,4 +32,6 @@ const languages: Record<string, (word: string) => number> = {
     "PL": countSyllablesPL
 };
 
+export const languageKeys = Object.keys(languages);
+
 export default languages;
