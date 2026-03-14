@@ -1,12 +1,13 @@
-import { DarkMode, FileDownload, FileUpload, InsertDriveFile, LightMode } from "@mui/icons-material";
+import { DarkMode, FileDownload, FileUpload, FormatClear, InsertDriveFile, LightMode, TextFormat, Timer, TimerOff } from "@mui/icons-material";
 import { AppBar, Box, Divider, IconButton, Toolbar, Tooltip, Typography } from "@mui/material";
 import { useMode } from "../../mode-context";
 import YesNoModal from "../../components/yes-no-modal";
 import { useCallback, useState } from "react";
-import { store, useAppDispatch } from "../../store/store";
+import { store, useAppDispatch, useAppSelector } from "../../store/store";
 import { resetSong, setLyrics, setTitle } from "../../store/song-slice";
 import { downloadFile } from "../../utils/download-file";
 import UploadModal from "../../components/upload-modal";
+import { toggleSyllableCounter, toggleTagHighlighter } from "../lyrics-editor/lyrics-editor-slice";
 
 export interface MainMenuProps {
     showOpts: boolean;
@@ -15,6 +16,9 @@ export interface MainMenuProps {
 
 export default function MainMenu({showOpts, setShowOpts}: MainMenuProps){
     const { mode, toggle } = useMode();
+    const tagHighlighterEnabled = useAppSelector(x => x.lyricsEditor.tagHighlighterEnabled);
+    const syllableCounterEnabled = useAppSelector(x => x.lyricsEditor.syllableCounterEnabled);
+    const syllableCounterLanguage = useAppSelector(x => x.lyricsEditor.syllableCounterLanguage);
     const [showNewModal, setShowNewModal] = useState(false);
     const [showImportModal, setShowImportModal] = useState(false);
     const dispatch = useAppDispatch();
@@ -44,6 +48,12 @@ export default function MainMenu({showOpts, setShowOpts}: MainMenuProps){
         dispatch(setTitle(title));
         dispatch(setLyrics(text));
     }, [dispatch]);
+    const handleHighlightClick = useCallback(() => {
+        dispatch(toggleTagHighlighter());
+    }, []);
+    const handleSyllableCounterClick = useCallback(() => {
+        dispatch(toggleSyllableCounter());
+    }, []);
     return <>
         <AppBar position="static">
             <Toolbar variant="dense">
@@ -61,6 +71,17 @@ export default function MainMenu({showOpts, setShowOpts}: MainMenuProps){
                 <Tooltip title="Upload" placement="top">
                     <IconButton color="inherit" aria-label="upload" onClick={handleImportClick}>
                         <FileUpload />
+                    </IconButton>
+                </Tooltip>
+                <Divider orientation="vertical" />
+                <Tooltip title="Tag highlight" placement="top">
+                    <IconButton color="inherit" aria-label="highlight" onClick={handleHighlightClick}>
+                        { tagHighlighterEnabled ? <TextFormat /> : <FormatClear /> }
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="Syllable counter" placement="top">
+                    <IconButton color="inherit" aria-label="highlight" onClick={handleSyllableCounterClick}>
+                        { syllableCounterEnabled ? <Timer /> : <TimerOff /> }
                     </IconButton>
                 </Tooltip>
                 <Box sx={{ flexGrow: 1 }} />
