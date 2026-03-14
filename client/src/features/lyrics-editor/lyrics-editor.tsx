@@ -4,8 +4,8 @@ import { EditorView, Decoration, WidgetType, ViewUpdate } from '@codemirror/view
 import { EditorState } from '@codemirror/state';
 import { useMode } from '../../mode-context';
 import { darcula } from '@uiw/codemirror-theme-darcula';
-import { useAppDispatch, useAppSelector } from '../../app/store';
-import { setLyrics } from './lyrics-editor-slice';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { setLyrics } from '../../store/song-slice';
 import { SxProps, Theme } from '@mui/material/styles';
 //import { basicSetup } from 'codemirror';
 
@@ -113,7 +113,7 @@ export default function LyricsEditor({sx}: LyricsEditorProps) {
   //const viewRef = useRef<EditorView | null>(null);
 
   const dispatch = useAppDispatch();
-  const lyrics = useAppSelector(x => x.lyricsEditor.lyrics);
+  const lyrics = useAppSelector(x => x.song.lyrics);
   //const [value, setValue] = React.useState("");
   const onChange = useCallback((val: string, _viewUpdate: ViewUpdate) => {
     //setValue(val);

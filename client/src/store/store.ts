@@ -1,12 +1,12 @@
 // src/app/store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import lyricsEditorReducer from '../features/lyrics-editor/lyrics-editor-slice'
+import songReducer from './song-slice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
-    lyricsEditor: lyricsEditorReducer,
+    song: songReducer,
   },
   //middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
 });

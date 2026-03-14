@@ -3,8 +3,8 @@ import { AppBar, Box, Divider, IconButton, Toolbar, Tooltip, Typography } from "
 import { useMode } from "../../mode-context";
 import YesNoModal from "../../components/yes-no-modal";
 import { useCallback, useState } from "react";
-import { store, useAppDispatch } from "../../app/store";
-import { resetSong, setLyrics, setTitle } from "../lyrics-editor/lyrics-editor-slice";
+import { store, useAppDispatch } from "../../store/store";
+import { resetSong, setLyrics, setTitle } from "../../store/song-slice";
 import { downloadFile } from "../../utils/download-file";
 import UploadModal from "../../components/upload-modal";
 
@@ -29,7 +29,7 @@ export default function MainMenu({showOpts, setShowOpts}: MainMenuProps){
         setShowNewModal(true);
     }, []);
     const handleExportClick = useCallback(() => {
-        const state = store.getState().lyricsEditor;
+        const state = store.getState().song;
         downloadFile(state.lyrics, state.title + ".txt");
     }, []);
     const handleImportModalClose = useCallback(() => {

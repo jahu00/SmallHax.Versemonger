@@ -1,14 +1,18 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import LyricsEditorState from "./types/lyrics-editor-state";
 
-const initialState: LyricsEditorState = {
+export interface SongState {
+    title: string;
+    lyrics: string;
+}
+
+const initialState: SongState = {
   lyrics: "",
   title: ""
 };
 
-const name = 'lyrics-editor';
+const name = 'song';
 
-export const lyricsEditorSlice = createSlice({
+export const songSlice = createSlice({
     name: name,
     initialState,
     reducers: {
@@ -25,6 +29,6 @@ export const lyricsEditorSlice = createSlice({
 });
 
 export const resetSong = createAction(`${name}/resetSong`);
-export const { setLyrics, setTitle } = lyricsEditorSlice.actions
+export const { setLyrics, setTitle } = songSlice.actions
 
-export default lyricsEditorSlice.reducer;
+export default songSlice.reducer;
