@@ -17,7 +17,6 @@ export function countSyllablesPL(word: string): number {
 
   if (!word) return 0;
 
-  // match one or more consecutive vowels
   const vowels = word.match(/[aeiouyąęó]/g);
   const softI = word.match(/i(?=[aeiouyęóą])/g);
   let count = (vowels?.length ?? 0) - (softI?.length ?? 0);
